@@ -43,3 +43,22 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+# Extend the Book model with custom permissions by adding a Meta class
+from django.db import models
+
+class Book(models.Model):
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=100)
+    published_date = models.DateField()
+    # Add other fields as needed
+
+    class Meta:
+        permissions = [
+            ("can_add_book", "Can add book"),
+            ("can_change_book", "Can change book"),
+            ("can_delete_book", "Can delete book"),
+        ]
+
+    def __str__(self):
+        return self.title
